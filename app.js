@@ -8,8 +8,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var hbs = require('hbs');
+const { Session } = require('inspector');
 
 var app = express();
+
+app.use(session({
+  secret: "secrettoken"
+}))
 
 const viewPath = path.join(__dirname, "/views/Pages")
 
