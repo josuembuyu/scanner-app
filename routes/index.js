@@ -26,4 +26,16 @@ router.get('/scan', function(req, res, next) {
   }
 });
 
+/** Déconnexion */
+router.get('/logout', function (req, res, next) {
+  if (req.session.admin && req.session.admin.id) {
+    delete req.session.admin;
+  } else {
+    res.redirect("/");
+  }
+  
+  res.redirect("/");
+
+})
+
 module.exports = router;
