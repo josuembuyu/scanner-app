@@ -217,3 +217,5 @@ function alertMessage(message, type) {
 function defaultAvatar() {
     return `/images/blank-profile-picture-973460_640.png`;
 }
+
+export { defaultAvatar, getDatas,customDate, sliceText, loader, postForm, alertMessage, notEmpty } 

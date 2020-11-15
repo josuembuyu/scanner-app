@@ -19,9 +19,15 @@ router.post("/users/login", (req, res) => {
     }
 
     if (functions.NoEmpty(datas)) {
-        functions.axiosPostRequest(url, datas, (statusCode, state, response) => {
+        functions.axiosPostRequest(`${API}/auth/login`, datas, (statusCode, state, response) => {
             if (state) {
+
+                var { data } = response;
+
+                req.session.admin = data;
+
                 res.status(statusCode).send(response);
+
             } else {
                 res.status(statusCode).send(response);
             }
@@ -33,3 +39,6 @@ router.post("/users/login", (req, res) => {
         })
     }
 })
+
+
+module.exports = router;

@@ -17,27 +17,31 @@
                                         <h6>Veuillez vous connecter</h6>
                                     </div>
                                 </div>
+                                <div id="message-alert"></div>
                                 <ul class="pt-5">
                                     <li>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Adress email">
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                placeholder="Numéro de téléphone"
+                                                name="phone">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Môt de passe">
+                                            <input 
+                                                type="password" 
+                                                class="form-control" 
+                                                placeholder="Môt de passe"
+                                                name="password">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="form-group">
-                                            <button type="submit" form="login-form" class="btn btn-submit btn-primary w-100">
+                                            <button id="login-form-btn" type="submit" form="login-form" class="btn btn-submit btn-primary w-100">
                                                 Se connecter
                                             </button>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-group forgot-password">
-                                            <a href="#">Môt de passe oublié ?</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -47,4 +51,4 @@
                 </div>
             </div>
         </div>
-{{> footer}}
+{{> scripts}}

@@ -7,10 +7,12 @@ import { postForm, alertMessage, getDatas, customDate} from "./init.js";
 const login = () => {
     postForm("login-form", "login-form-btn", "/api/users/login", (state, datas) => {
         if (state) {
-            
+            window.location.assign("/dashboard")
         } else {
-            
+            $("#message-alert").html(alertMessage(datas.message, 'danger'));
         }
     })
 }
+
+export { login } 
 

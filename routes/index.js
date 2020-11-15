@@ -9,12 +9,21 @@ router.get('/', function(req, res, next) {
 
 /* Dashboard. */
 router.get('/dashboard', function(req, res, next) {
-  res.render('home', { title: 'Votre tableau de board' });
+  if (req.session.admin && req.session.admin.id) {
+    res.render('home', { title: 'Votre tableau de board', admin: req.session.admin });
+    console.log(req.session.admin);
+  } else {
+    res.redirect("/");
+  }
 });
 
 /** Scanner */
 router.get('/scan', function(req, res, next) {
-  res.render('scan', { title: 'Scanner' });
+  if (req.session.admin && req.session.admin.id) {
+    res.render('scan', { title: 'Scanner' });
+  } else {
+    res.redirect("/");
+  }
 });
 
 module.exports = router;
