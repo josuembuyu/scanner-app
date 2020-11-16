@@ -3,6 +3,7 @@ var express = require('express'),
     API = require('./includes/config').URL().API,
     functions = require('./includes/module'),
     session = require("cookie-session"),
+    axios = require("axios").default;
     app = express();
 
 app.use(session({
@@ -39,6 +40,26 @@ router.post("/users/login", (req, res) => {
         })
     }
 })
+
+
+/**
+ * Récuperation de la session du user
+ */
+
+ router.get("/getsession", (req, res) => {
+    if (req.session.admin && req.session.admin.id) {
+        res.status(200).send({
+            state: true,
+            message: "Voici les informations du user",
+            data: req.session.admin
+        });
+    } else {
+        res.status(200).send({
+            state: false,
+            message: "Le user n'est pas connecté"
+        });
+    }
+ })
 
 
 module.exports = router;

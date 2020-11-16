@@ -78,14 +78,21 @@ function postForm(form, button, url, callback) {
  * @param {*} callback la fonctions callback
  */
 
-function getDatas(url, callback) {
-    $.get(url, function (data) {
-        if (data.state) {
-            callback(true, data);
-        } else {
-            callback(false, data);
+function getDatas(url,token, callback) {
+    $.ajax({
+        url: url,
+        headers: {
+            'api_token':token,
+        },
+        type: 'GET',
+        success: function(data){
+            if (data.state) {
+                callback(true, data);
+            } else {
+                callback(false, data);
+            }
         }
-    });
+      });
 }
 
 /**
