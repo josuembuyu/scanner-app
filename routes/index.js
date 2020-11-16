@@ -18,7 +18,7 @@ router.get('/dashboard', function(req, res, next) {
 });
 
 /** Scanner */
-router.get('/scan', function(req, res, next) {
+router.get('/scan/:id', function(req, res, next) {
   if (req.session.admin && req.session.admin.id) {
     res.render('scan', { title: 'Scanner' });
   } else {
