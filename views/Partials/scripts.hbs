@@ -32,42 +32,53 @@
     </script>
     
     <script type="text/javascript">
-        var url = window.location.pathname
-        if(url == "/scan"){
-            let scanner = new Instascan.Scanner({
-                video: document.getElementById('preview')
-            });
+        let scanner = new Instascan.Scanner({
+            video: document.getElementById('preview')
+        });
 
-            scanner.addListener('scan', function (content) {
-                
-                Swal.fire({
-                    title: `code est ${content}`,
-                    html:
-                        '<b>L2 Génie logiciel</b>, ' +
-                        '<br/>' +
-                        'Peut accéder',
-                    imageUrl: 'https://scontent.ffih1-2.fna.fbcdn.net/v/t1.0-9/119727456_1986381024825813_8436108491130199342_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeG88gQ_UIFoFDUaQKILq9Vb2UKvC-sn0YTZQq8L6yfRhO8esVq3yNV8LwpMjLukfcV1xGaJwRb7144JiBZHVwVB&_nc_ohc=ohyPWEoK7mEAX-YVVgS&_nc_ht=scontent.ffih1-2.fna&oh=7f82284a598b9dc5c6678d177d11fae6&oe=5FC7871E',
-                    imageWidth: 400,
-                    imageHeight: 200,
-                    imageAlt: 'Custom image',
-                    confirmButtonText:
-                    'CONFIRMER',
+        var url = window.location.pathname;
+        url = url.split('/')[2]
+        console.log(url)
+
+        scanner.addListener('scan', function (content) {
+            $("#scan_div").html(`<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`)
+            $.get("/api/getsession", function (response) {
+                $.get(`https://www.goshen.auroreapp.com/api/session/control/solvability/${content}/${url}?api_token=${response.data.api_token}`, (datas) => {
+                    $("#scan_div").html(``);
+                    var datas = JSON.parse(datas)
+                    if(datas.state){
+                        Swal.fire({
+                            icon: 'success',
+                            title: `${datas.data.first_name} ${datas.data.name}`,
+                            html: `${datas.message}`,
+                            confirmButtonText:
+                            'CONFIRMER',
+                        })
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: `Erreur`,
+                            html: `${datas.message}`,
+                            confirmButtonText:
+                            'OK',
+                        })
+                    }                 
                 })
             });
+            
+        });
 
 
-            Instascan.Camera.getCameras().then(function (cameras) {
-                console.log(cameras)
-                if (cameras.length > 0) {
-                    scanner.start(cameras[cameras.length - 1]);
-                } else {
-                console.error('No cameras found.');
-                }
-            }).catch(function (e) {
-                console.error(e);
-            });
-        }
-        
+        Instascan.Camera.getCameras().then(function (cameras) {
+            console.log(cameras)
+            if (cameras.length > 0) {
+                scanner.start(cameras[cameras.length - 1]);
+            } else {
+            console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
     </script>
 </body>
 
