@@ -13,24 +13,6 @@
     <script src="/javascripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="module" src="/javascripts/api/router.js"></script>
-    <script>
-        $("#btn-success").on('click', () => {
-            Swal.fire({
-                title: 'Gipoy Gishiya',
-                html:
-                    '<b>L2 Génie logiciel</b>, ' +
-                    '<br/>' +
-                    'Peut accéder',
-                imageUrl: 'https://scontent.ffih1-2.fna.fbcdn.net/v/t1.0-9/119727456_1986381024825813_8436108491130199342_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeG88gQ_UIFoFDUaQKILq9Vb2UKvC-sn0YTZQq8L6yfRhO8esVq3yNV8LwpMjLukfcV1xGaJwRb7144JiBZHVwVB&_nc_ohc=ohyPWEoK7mEAX-YVVgS&_nc_ht=scontent.ffih1-2.fna&oh=7f82284a598b9dc5c6678d177d11fae6&oe=5FC7871E',
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
-                confirmButtonText:
-                'CONFIRMER',
-            })
-        })
-    </script>
-    
     <script type="text/javascript">
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview')
@@ -79,6 +61,51 @@
         }).catch(function (e) {
             console.error(e);
         });
+    </script>
+
+    <script type="text/javascript">
+        
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function () {
+				navigator.serviceWorker.register('./sw.js').then(function (registration) {
+					// Registration was successful
+					console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function (err) {
+					// registration failed :(
+					console.log('ServiceWorker registration failed: ', err);
+				});
+			});
+		}
+
+		let deferredPrompt;
+		var div = document.querySelector('.add-to');
+		var button = document.querySelector('.add-to-btn');
+		div.style.display = 'none';
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+			// Prevent Chrome 67 and earlier from automatically showing the prompt
+			e.preventDefault();
+			// Stash the event so it can be triggered later.
+			deferredPrompt = e;
+			div.style.display = 'block';
+
+			button.addEventListener('click', (e) => {
+				// hide our user interface that shows our A2HS button
+				div.style.display = 'none';
+				// Show the prompt
+				deferredPrompt.prompt();
+				// Wait for the user to respond to the prompt
+				deferredPrompt.userChoice
+					.then((choiceResult) => {
+						if (choiceResult.outcome === 'accepted') {
+							console.log('User accepted the A2HS prompt');
+						} else {
+							console.log('User dismissed the A2HS prompt');
+						}
+						deferredPrompt = null;
+					});
+			});
+		});
     </script>
 </body>
 
