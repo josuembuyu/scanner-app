@@ -28,9 +28,13 @@
             $.get(`https://www.goshen.auroreapp.com/api/session/control/solvability/${content}/${url}?api_token=${response.data.api_token}`, (datas) => {
                 $("#scan_div").html(``);
                 var datas = JSON.parse(datas)
+                console.log(datas)
                 if (datas.state) {
                     Swal.fire({
-                        icon: 'success',
+                        imageUrl: `https://www.goshen.auroreapp.com/storage/${datas.data.profile}`,
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        imageAlt: `${datas.data.first_name} ${datas.data.name}`,
                         title: `${datas.data.first_name} ${datas.data.name}`,
                         html: `${datas.message}`,
                         confirmButtonText:
