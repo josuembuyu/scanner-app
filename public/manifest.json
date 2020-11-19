@@ -1,0 +1,15 @@
+{
+	"short_name": "Goshen-App",
+	"name": "ISIPA Scanner",
+	"icons": [
+	  {
+		"src": "https://icons.iconarchive.com/icons/dominicanjoker/comic-publisher-folder/512/Icon-icon.png",
+		"type": "image/png",
+		"sizes": "512x512"
+	  }
+	],
+	"start_url": "http://localhost:4000/",
+	"background_color": "#3367D6",
+	"display": "standalone",
+	"theme_color": "#3367D6"
+  }
