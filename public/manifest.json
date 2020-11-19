@@ -6,9 +6,14 @@
 		"src": "https://icons.iconarchive.com/icons/dominicanjoker/comic-publisher-folder/512/Icon-icon.png",
 		"type": "image/png",
 		"sizes": "512x512"
+	  },
+	  {
+		"src": "https://icons.iconarchive.com/icons/dominicanjoker/comic-publisher-folder/48/Icon-icon.png",
+		"type": "image/png",
+		"sizes": "32x32"
 	  }
 	],
-	"start_url": "http://localhost:4000/",
+	"start_url": "https://goshen-tfc.herokuapp.com/",
 	"background_color": "#3367D6",
 	"display": "standalone",
 	"theme_color": "#3367D6"
